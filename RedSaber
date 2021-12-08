@@ -1,0 +1,80 @@
+-- Hat is https://www.roblox.com/catalog/5979445178/Saber-Simulator-Red-Light-Saber
+local att01
+local att11
+local att0
+local att1
+local usp = game:GetService("UserInputService")
+local Plr = game:GetService("Players").LocalPlayer
+local Character = Plr.Character
+for i,v in pairs(Character:GetDescendants()) do
+	if v:IsA("BasePart") and v.Name ~= "HumanoidRootPart" then 
+		game:GetService("RunService").Heartbeat:connect(function()
+			v.Velocity = Vector3.new(-30,0,0)
+		end)
+	end
+end
+loadstring(game:HttpGet("https://raw.githubusercontent.com/OpenGamerTips/Roblox-Scripts/main/NetworkScripts/ownership.lua"))()
+--ignore above ^
+local function attach() -- moving function
+	att01 = Instance.new("Attachment", Character["Left Arm"])
+	att01.Name = "asdf"
+	att01.Position = Vector3.new(0,0,0)
+	att11 = Instance.new("Attachment", Character["Torso"])
+	att11.Name = "asdf"
+	att11.Position = Vector3.new(-1.5,0.5,-0.5)--position
+	att11.Rotation = Vector3.new(100, 0, 5)--rotation
+	local AP = Instance.new("AlignPosition", Character["Left Arm"])
+	AP.Name = "asdf"
+	AP.Attachment0 = att01
+	AP.Attachment1 = att11
+	AP.RigidityEnabled = false
+	AP.ReactionForceEnabled = false
+	AP.ApplyAtCenterOfMass = true
+	AP.MaxForce = 9999999
+	AP.MaxVelocity = math.huge
+	AP.Responsiveness = 1000000000000
+	local AO = Instance.new("AlignOrientation", Character["Left Arm"])
+	AO.Name = "asdf"
+	AO.Attachment0 = att01
+	AO.Attachment1 = att11
+	AO.ReactionTorqueEnabled = true
+	AO.PrimaryAxisOnly = false
+	AO.MaxTorque = 9999999
+	AO.MaxAngularVelocity = math.huge
+	AO.Responsiveness = 10000000000000
+end
+Character["Left Arm"]:BreakJoints()--breaks the joints so you can customize its position
+attach()
+
+local Hats = {
+	RedSaber = Character:WaitForChild("MeshPartAccessory"), -- the hat/body limb name
+
+}
+Hats.RedSaber.Handle.AccessoryWeld:Destroy()
+Hats.xd.Handle.HatAttachment:Destroy()
+local function align(i,v) -- puts everything in place
+	att0 = Instance.new("Attachment", i)
+	att0.Position = Vector3.new(0,0,0) 
+	att1 = Instance.new("Attachment", v)
+	att1.Position = Vector3.new(0.5,-1,-1.5)
+	att1.Rotation = Vector3.new(-90, 90, 180)
+	local AP = Instance.new("AlignPosition", i)
+	AP.Attachment0 = att0
+	AP.Attachment1 = att1
+	AP.RigidityEnabled = false
+	AP.ReactionForceEnabled = false
+	AP.ApplyAtCenterOfMass = true
+	AP.MaxForce = 9999999
+	AP.MaxVelocity = math.huge
+	AP.Responsiveness = 1000000000000
+	local AO = Instance.new("AlignOrientation", i)
+	AO.Attachment0 = att0
+	AO.Attachment1 = att1
+	AO.ReactionTorqueEnabled = true
+	AO.PrimaryAxisOnly = false
+	AO.MaxTorque = 9999999
+	AO.MaxAngularVelocity = math.huge
+	AO.Responsiveness = 10000000000000
+end
+
+align(Hats.RedSaber.Handle, Character["Left Arm"])
